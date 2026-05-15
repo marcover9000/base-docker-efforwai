@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# reset complet: borra volums i imatges locals, reconstrueix
+set -euo pipefail
+cd "$(dirname "$0")/.."
+read -rp "Això esborrarà volums i imatges. Segur? [s/N] " r
+[[ "$r" =~ ^[sS]$ ]] || exit 0
+docker compose down -v --rmi local
+docker compose build --no-cache
+docker compose up -d
