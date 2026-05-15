@@ -4,6 +4,10 @@ Plantilla d'infraestructura Docker per a projectes Laravel amb la
 forma `xxxx-admin` (front) + `xxxx-api` (back). Tot va per Docker;
 només cal editar `.env`.
 
+> Aquesta plantilla **no instal·la Laravel**. Els projectes admin i api
+> han d'existir ja als directoris germans; el Docker els munta i els
+> executa.
+
 ## Estructura esperada al disc
 
 ```
