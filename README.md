@@ -17,6 +17,11 @@ projecte-x/
 └── projecte-x-infra/   # ← còpia d'aquesta plantilla
 ```
 
+## Requisits
+
+Cal tenir Docker Engine + Compose v2 instal·lats. Si no els tens,
+mira [docs/install-docker.md](docs/install-docker.md).
+
 ## Setup d'un projecte nou
 
 1. Copia la carpeta `base-docker/` a `<projecte>-infra/`.
