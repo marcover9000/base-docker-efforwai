@@ -35,6 +35,7 @@ services:
       - db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mariadb-admin", "ping", "-p${DB_PASSWORD}"]
+      interval: 5s
       retries: 5
       timeout: 3s
     networks: [app]
