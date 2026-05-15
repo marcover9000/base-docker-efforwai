@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# shell al contenidor admin. usa -r per entrar com a root
+set -euo pipefail
+cd "$(dirname "$0")/.."
+if [[ "${1:-}" == "-r" ]]; then
+    shift
+    docker compose exec -u root admin bash "$@"
+else
+    docker compose exec admin bash "$@"
+fi
