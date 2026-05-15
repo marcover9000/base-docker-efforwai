@@ -38,6 +38,7 @@ services:
       interval: 5s
       retries: 5
       timeout: 3s
+      start_period: 30s
     networks: [app]
 
 volumes:
