@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# php artisan dins d'admin o api
+# ús: ./bin/artisan api migrate   |   ./bin/artisan admin route:list
+set -euo pipefail
+cd "$(dirname "$0")/.."
+target="${1:?cal indicar admin|api}"
+shift
+docker compose exec "$target" php artisan "$@"
