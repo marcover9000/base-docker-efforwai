@@ -1,0 +1,47 @@
+services:
+  admin:
+    build: ./docker/php-admin
+    container_name: ${PROJECT_NAME}-admin
+    ports:
+      - "${APP_PORT:-8000}:80"
+      - "${VITE_PORT:-5173}:5173"
+    volumes:
+      - ../${PROJECT_NAME}-admin:/var/www/html
+    networks: [app]
+
+  api:
+    build: ./docker/php-api
+    container_name: ${PROJECT_NAME}-api
+    ports:
+      - "${API_PORT:-8001}:80"
+    volumes:
+      - ../${PROJECT_NAME}-api:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [app]
+
+  db:
+    image: mariadb:10.3.39
+    container_name: ${PROJECT_NAME}-db
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-p${DB_PASSWORD}"]
+      retries: 5
+      timeout: 3s
+    networks: [app]
+
+volumes:
+  db_data:
+
+networks:
+  app:
+    driver: bridge
